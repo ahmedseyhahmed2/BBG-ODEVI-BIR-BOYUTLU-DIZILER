@@ -1,24 +1,50 @@
 #include <stdio.h>
-#include <string.h>
 
-int main() {
-    char morse[100];
-    printf("Morse koduyla kodlanmis bir mesaj girin: ");
-    fgets(morse, 100, stdin);
-
-    printf("Çozulmus mesaj: ");
-    for (int i = 0; i < strlen(morse); i++) {
-        if (morse[i] == '.') {
-            printf("E");
-        } else if (morse[i] == '-') {
-            printf("T");
-        } else if (morse[i] == ' ') {
-            printf(" ");
-        } else {
-            printf("%c", morse[i]);
+void dondur(int a[][10], int m, int n)
+{
+    int temp[10][10];
+    int i, j;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            temp[n-1-j][i] = a[i][j];
         }
     }
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            a[i][j] = temp[i][j];
+        }
+    }
+}
 
+int main()
+{
+    int a[10][10], m, n;
+    printf("Matrisin satir sayisini girin: ");
+    scanf("%d", &m);
+    printf("Matrisin sütun sayisini girin: ");
+    scanf("%d", &n);
+    printf("Matrisin elemanlarini girin: \n");
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            scanf("%d", &a[i][j]);
+        }
+    }
+    dondur(a, m, n);
+    printf("Dondurulmus matris: \n");
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            printf("%d ", a[i][j]);
+        }
+        printf("\n");
+    }
     return 0;
 }
 

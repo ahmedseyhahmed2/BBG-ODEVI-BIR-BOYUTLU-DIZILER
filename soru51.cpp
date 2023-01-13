@@ -1,26 +1,36 @@
 #include <stdio.h>
-#include <string.h>
 
-#define MAX_MESSAGE_LENGTH 100
-
-void encodeHollerith(char *message, char *encodedMessage) {
-  // Hollerith kodu olusturma islemleri burada yapilir
-  // Örnegin, her karakterin kodunun kendinden sonra
-  // kaç tane oldugunu gösteren bir sayi eklenerek olusturulabilir
-  strcpy(encodedMessage, "Kodlanmis mesaj");
+void transpose(int matris[][10], int m, int n) {
+    int i, j, temp;
+    for (i = 0; i < m; i++) {
+        for (j = i+1; j < n; j++) {
+            temp = matris[i][j];
+            matris[i][j] = matris[j][i];
+            matris[j][i] = temp;
+        }
+    }
 }
 
 int main() {
-  char message[MAX_MESSAGE_LENGTH + 1];
-  char encodedMessage[MAX_MESSAGE_LENGTH * 2 + 1]; // Kodlanmis mesajin uzunlugu aslindan daha uzun olabilir
-
-  printf("Lutfen mesaji giriniz: ");
-  scanf("%s", message);
-
-  encodeHollerith(message, encodedMessage);
-
-  printf("Kodlanmis mesaj: %s\n", encodedMessage);
-
-  return 0;
+    int matris[10][10], m, n;
+    printf("Matrisin satir sayisini girin: ");
+    scanf("%d", &m);
+    printf("Matrisin sütun sayisini girin: ");
+    scanf("%d", &n);
+    printf("Matrisin elemanlarini girin: \n");
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &matris[i][j]);
+        }
+    }
+    transpose(matris, m, n);
+    printf("Transpose edilmis matris:\n");
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d ", matris[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
 }
 

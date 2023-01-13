@@ -1,28 +1,62 @@
 #include <stdio.h>
-#include <string.h>
 
-int main() {
-    char mesaj[100];
-    printf("Lutfen kodlamak istediginiz mesaji giriniz: ");
-    gets(mesaj);  // klavyeden metni al
-    int uzunluk = strlen(mesaj);  // metnin uzunlugunu bul
-    printf("Kodlanmis mesaj: ");
-    for (int i = 0; i < uzunluk; i++) {
-        char karakter = mesaj[i];
-        if (karakter >= 'A' && karakter <= 'Z') {
-            // Eger harf buyuk harf ise, ITA1 kodlamasina gore kodlar
-            char kod = karakter - 'A' + '!';
-            printf("%c", kod);
-        } else if (karakter >= 'a' && karakter <= 'z') {
-            // Eger harf kucuk harf ise, ITA1 kodlamasina gore kodlar
-            char kod = karakter - 'a' + '^';
-            printf("%c", kod);
-        } else {
-            // Eger harf degilse, direkt yazdir
-            printf("%c", karakter);
+int eskuvvetli(int a[][10], int m, int n)
+{
+    int i, j, k, flag = 1;
+    int temp[10][10];
+
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            temp[i][j] = 0;
+            for (k = 0; k < n; k++)
+            {
+                temp[i][j] += a[i][k] * a[k][j];
+            }
         }
     }
-    printf("\n");  // satiri sonlandir
-    return 0;
+
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            if (temp[i][j] != a[i][j])
+            {
+                flag = 0;
+                break;
+            }
+        }
+    }
+
+    return flag;
 }
+
+int main()
+{
+    int a[10][10], m, n;
+    printf("Matrisin satir sayisini girin: ");
+    scanf("%d", &m);
+    printf("Matrisin sütun sayisini girin: ");
+    scanf("%d", &n);
+    printf("Matrisin elemanlarini girin: \n");
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            scanf("%d", &a[i][j]);
+        }
+    }
+    if (eskuvvetli(a, m, n))
+    {
+        printf("Girilen matris eskuvvetli bir matristir\n");
+    }
+    else
+    {
+        printf("Girilen matris eskuvvetli bir matris degildir\n");
+    }
+    return 0;
+
+    
+
 

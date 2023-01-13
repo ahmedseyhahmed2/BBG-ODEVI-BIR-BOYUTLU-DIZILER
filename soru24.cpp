@@ -1,19 +1,18 @@
 #include <stdio.h>
 
-int main(void) {
-  int sayi;  // Girilen sayi
-  printf("Pozitif tamsayi girin: ");
-  scanf("%d", &sayi);  // Sayiyi klavyeden al
+int main() {
+    int kenar;
+    printf("Kenar uzunlugunu giriniz (1-20): ");
+    scanf("%d", &kenar);
 
-  printf("Bolenler:\n");
-  // Tüm sayilar için kontrol et
-  for (int i = 1; i <= sayi; i++) {
-    // Eger sayi i bölen ise, yazdir
-    if (sayi % i == 0) {
-      printf("%d\n", i);
+    int i, j;
+    for (i = 1; i <= kenar; i++) {
+        for (j = 1; j <= i; j++) {
+            printf("* ");
+        }
+        printf("\n");
     }
-  }
 
-  return 0;
+    return 0;
 }
 

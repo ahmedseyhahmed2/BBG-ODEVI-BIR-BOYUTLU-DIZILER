@@ -1,27 +1,25 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <string.h>
-#include <unistd.h>  // sleep() fonksiyonunu kullanmak için gerekli olan baslik
+#include <unistd.h>
 
-int main(void) {
-  char s[100];  // Girilen cümleyi tutacak dizi
-  printf("Bir cümle girin: ");
-  gets(s);  // Cümleyi klavyeden al
+int main() {
+    char mesaj[50];
+    printf("Mesaji giriniz: ");
+    scanf("%s", mesaj);
 
-  int uzunluk = strlen(s);  // Cümlenin uzunlugunu bul
-
-  // Mavi zemin üzerine sari ile yaz
-  printf("\033[44m\033[33m");
-
-  // Cümlenin her harfini 1 s araliklarla kirmiziya dönüstür
-  for (int i = 0; i < uzunluk; i++) {
-    printf("%c", s[i]);
-    fflush(stdout);  // Çiktiyi terminal ekranina yaz
-    sleep(1);  // 1 s bekle
-    printf("\033[31m");  // Yazi rengini kirmiziya dönüstür
-  }
-
-  printf("\033[0m");  // Öntanimli renkleri kullanmaya geri dön
-
-  return 0;
+    int i;
+    srand(time(0));
+    for (i = 0; i < strlen(mesaj); i++) {
+        int r = rand() % 2;
+        char harf = mesaj[i];
+        int r2 = rand() % 7 + 31;  //random renk
+        printf("\033[1;%dm%c", r2, harf);
+        fflush(stdout); 
+        sleep(1);
+        printf("\033[0m\n"); //renk kapat
+    }
+    return 0;
 }
 

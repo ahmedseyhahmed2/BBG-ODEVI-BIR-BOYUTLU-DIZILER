@@ -1,25 +1,43 @@
 #include <stdio.h>
-#include <ctype.h>
 
-#define MAX_LENGTH 100
+int main()
+{
+    int n, i, j;
+    printf("n*n matrisinin boyutunu giriniz: ");
+    scanf("%d", &n);
 
-int main(void) {
-  char sentence[MAX_LENGTH];
-  int i;
+    int A[n][n], B[n*n], C[n*n], p = 0, neg = 0; // A matrisi, B ve C dizileri ve pozitif ve negatif eleman sayilarini tutan degiskenler tanimlandi
 
-  printf("Cumleyi girin: ");
-  scanf("%[^\n]", sentence);
-
-  for (i = 0; sentence[i] != '\0'; i++) {
-    if (i % 2 == 0) {
-      putchar(toupper(sentence[i]));
-    } else {
-      putchar(tolower(sentence[i]));
+    // A matrisi kullanici tarafindan girildi
+    printf("A matrisini giriniz: \n");
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            scanf("%d", &A[i][j]);
+        }
     }
-  }
 
-  putchar('\n');
+    // A matrisindeki pozitif elemanlar B dizisine, negatif elemanlar C dizisine aktarildi
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            if (A[i][j] > 0)
+                B[p++] = A[i][j];
+            else
+                C[neg++] = A[i][j];
+        }
+    }
 
-  return 0;
+    // sonuçlar ekrana yazdirildi
+    printf("Pozitif elemanlar: ");
+    for (i = 0; i < p; i++)
+        printf("%d ", B[i]);
+    printf("\nNegatif elemanlar: ");
+    for (i = 0; i < neg; i++)
+        printf("%d ", C[i]);
+
+    return 0;
 }
 

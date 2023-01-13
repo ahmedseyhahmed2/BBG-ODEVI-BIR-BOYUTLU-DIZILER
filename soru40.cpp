@@ -1,19 +1,58 @@
 #include <stdio.h>
-#include <string.h>
 
-int main() {
-  char message[100];
+void carp(int a[][10], int b[][10], int c[][10], int m, int n, int p)
+{
+    int i, j, k;
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < p; j++)
+        {
+            c[i][j] = 0;
+            for (k = 0; k < n; k++)
+            {
+                c[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+}
 
-  printf("Lütfen mesajinizi giriniz: ");
-  scanf("%[^\n]s", message);
-
-  int length = strlen(message);
-
-  for (int i = 0; i < length; i++) {
-    printf("%d ", message[i]);
-  }
-  printf("\n");
-
-  return 0;
+int main()
+{
+    int a[10][10], b[10][10], c[10][10], m, n, p;
+    printf("Matris A'nın satır sayısını girin: ");
+    scanf("%d", &m);
+    printf("Matris A'nın sütun sayısını girin: ");
+    scanf("%d", &n);
+    printf("Matris A'nın elemanlarını girin: \n");
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            scanf("%d", &a[i][j]);
+        }
+    }
+    printf("Matris B'nin satır sayısını girin: ");
+    scanf("%d", &n);
+    printf("Matris B'nin sütun sayısını girin: ");
+    scanf("%d", &p);
+    printf("Matris B'nin elemanlarını girin: \n");
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < p; j++)
+        {
+            scanf("%d", &b[i][j]);
+        }
+    }
+    carp(a, b, c, m, n, p);
+    printf("Sonuç matrisi: \n");
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < p; j++)
+        {
+            printf("%d ", c[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
 }
 

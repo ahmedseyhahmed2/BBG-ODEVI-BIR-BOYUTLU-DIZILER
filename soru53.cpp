@@ -1,58 +1,45 @@
 #include <stdio.h>
-#include <math.h>
 
-// Renkler arasi dönüsüm islemleri için kullanilacak sabitler
-#define MIN(x, y, z) ((x) < (y) ? ((x) < (z) ? (x) : (z)) : ((y) < (z) ? (y) : (z)))
-#define MAX(x, y, z) ((x) > (y) ? ((x) > (z) ? (x) : (z)) : ((y) > (z) ? (y) : (z)))
-
-void hsvToCmyk(double h, double s, double v, double *c, double *m, double *y, double *k) {
-  // HSV'den CMYK'ya dönüsüm islemleri burada yapilir
-  double r, g, b;
-
-  // HSV degerlerinden RGB degerlerine dönüstürme
-  int i = floor(h * 6);
-  double f = h * 6 - i;
-  double p = v * (1 - s);
-  double q = v * (1 - f * s);
-  double t = v * (1 - (1 - f) * s);
-  switch (i % 6) {
-    case 0:
-      r = v, g = t, b = p;
-      break;
-    case 1:
-      r = q, g = v, b = p;
-      break;
-    case 2:
-      r = p, g = v, b = t;
-      break;
-    case 3:
-      r = p, g = q, b = v;
-      break;
-    case 4:
-      r = t, g = p, b = v;
-      break;
-    case 5:
-      r = v, g = p, b = q;
-      break;
-  }
-
-  // RGB degerlerinden CMYK degerlerine dönüstürme
-  *k = 1 - MAX(r, g, b);
-  if (*k == 1) {
-    *c = 0;
-    *m = 0;
-    *y = 0;
-  } else {
-    *c = (1 - r - *k) / (1 - *k);
-    *m = (1 - g - *k) / (1 - *k);
-    *y = (1 - b - *k) / (1 - *k);
-  }
+void findRegions(int matris[][10], int m, int n) {
+    int i, j;
+    int x1, y1, x2, y2;
+    int regionCount = 0;
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < n; j++) {
+            if (matris[i][j] == 0) {
+                x1 = i;
+                y1 = j;
+                while (matris[i][j] == 0) {
+                    i++;
+                }
+                x2 = i-1;
+                i--;
+                while (matris[i][j] == 0) {
+                    j++;
+                }
+                y2 = j-1;
+                regionCount++;
+                printf("Region %d: (%d, %d) - (%d, %d)\n", regionCount, x1, y1, x2, y2);
+            }
+        }
+    }
 }
 
 int main() {
-  double h, s, v;
-  double c, m, y, k;
+    int matris[10][10], m, n;
+    printf("Matrisin satir sayisini girin: ");
+    scanf("%d", &m);
+    printf("Matrisin sütun sayisini girin: ");
+    scanf("%d", &n);
+    printf("Matrisin elemanlarini girin (0 veya 1):\n");
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &matris[i][j]);
+        }
+    }
+    printf("0 içeren dikdörtgensel bölgeler:\n");
+    findRegions(matris, m, n);
+    return 0;
+}
 
-  printf("Lütfen renk degerlerini giriniz (HSV biçiminde, virgülle ayrilmis olarak): ");
-  scanf("%lf, %lf, %lf", &
 

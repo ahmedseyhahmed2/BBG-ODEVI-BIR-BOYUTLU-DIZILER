@@ -1,35 +1,39 @@
 #include <stdio.h>
 
-int main(void) {
-  int sayi;  // Girilen sayi
-  printf("Pozitif tamsayi girin: ");
-  scanf("%d", &sayi);  // Sayiyi klavyeden al
+int main() {
+    int n;
+    printf("Matrisin boyutunu giriniz (n*n): ");
+    scanf("%d", &n);
 
-  int basamak_sayisi = 0;  // Sayinin basamak sayisi
-  // Sayinin basamak sayisini bul
-  while (sayi > 0) {
-    basamak_sayisi++;
-    sayi /= 10;
-  }
+    int matris[n][n];
+    int i, j;
 
-  // Basamakli en büyük tamsayi: 99999... (basamak sayisi kadar)
-  int en_buyuk = 0;
-  for (int i = 0; i < basamak_sayisi; i++) {
-    en_buyuk = en_buyuk * 10 + 9;
-  }
+    // Matrisi kullanici tarafindan gir
+    printf("Matrisi giriniz: \n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            scanf("%d", &matris[i][j]);
+        }
+    }
 
-  // Basamakli en küçük tamsayi: 100... (basamak sayisi kadar)
-  int en_kucuk = 1;
-  for (int i = 0; i < basamak_sayisi - 1; i++) {
-    en_kucuk = en_kucuk * 10;
-  }
+    // Matrisi yatay olarak çevir
+    for (i = 0; i < n / 2; i++) {
+        for (j = 0; j < n; j++) {
+            int temp = matris[i][j];
+            matris[i][j] = matris[n - i - 1][j];
+            matris[n - i - 1][j] = temp;
+        }
+    }
 
-  // Farki hesapla
-  int fark = en_buyuk - en_kucuk;
-  printf("Basamakli en buyuk tamsayi: %d\n", en_buyuk);
-  printf("Basamakli en kucuk tamsayi: %d\n", en_kucuk);
-  printf("Fark: %d\n", fark);
+    // Çevrilmis matrisi yazdir
+    printf("Cevrilmis matris: \n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            printf("%d ", matris[i][j]);
+        }
+        printf("\n");
+    }
 
-  return 0;
+    return 0;
 }
 

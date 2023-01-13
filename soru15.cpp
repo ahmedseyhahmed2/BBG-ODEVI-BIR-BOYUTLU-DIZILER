@@ -1,15 +1,40 @@
 #include <stdio.h>
-#include <string.h>
 
-int main(void) {
-  int gun, ay;  // Dogum tarihinin gün ve ay degerlerini tutacak degiskenler
-  printf("Dogum tarihinizi girin (gün ay seklinde): ");
-  scanf("%d %d", &gun, &ay);  // Dogum tarihini klavyeden al
+int main() {
+    int n;
+    printf("Matrisin boyutunu giriniz (n*n): ");
+    scanf("%d", &n);
 
-  // Kisinin burcunu bul
-  if ((ay == 3 && gun >= 21) || (ay == 4 && gun <= 20)) {
-    printf("Burcunuz: Koç\n");
-  } else if ((ay == 4 && gun >= 21) || (ay == 5 && gun <= 21)) {
-    printf("Burcunuz: Boga\n");
-  } else if ((ay == 5 && gun >= 22) || (ay == 6 &&
+    int matris[n][n]; // Matris tanimlandi
+
+    // Matris kullanici tarafindan girildi
+    printf("Matrisi giriniz: \n");
+    int i, j;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            scanf("%d", &matris[i][j]);
+        }
+    }
+
+    // Ana kösegen ve yedek kösegen üzerindeki elemanlari degistir
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            if (i == j || i + j == n - 1) {
+                int temp = matris[i][j];
+                matris[i][j] = matris[n - 1 - i][n - 1 - j];
+                matris[n - 1 - i][n - 1 - j] = temp;
+            }
+        }
+    }
+
+    // Degistirilen matrisi ekrana yazdir
+    printf("Degistirilen matris: \n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            printf("%d ", matris[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
 

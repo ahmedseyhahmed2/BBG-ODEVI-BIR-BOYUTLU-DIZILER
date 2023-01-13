@@ -1,28 +1,33 @@
 #include <stdio.h>
-#include <string.h>
 
-int main(void) {
-  char cumle[1000];  // Girilen cümle
-  printf("Cümle girin: ");
-  gets(cumle);  // Cümleyi klavyeden al
+int main() {
+    int n;
+    printf("Matrisin boyutunu giriniz (n*n): ");
+    scanf("%d", &n);
 
-  char en_uzun_kelime[100] = "";  // En uzun kelime
-  char kelime[100];  // Cümleden çikartilacak kelime
-  int uzunluk = strlen(cumle);
-  // Cümleden kelime çikart
-  for (int i = 0; i < uzunluk; i++) {
-    // Eger bosluk karakterine ulasildiysa, en uzun kelimeyi güncelle
-    if (cumle[i] == ' ') {
-      if (strlen(kelime) > strlen(en_uzun_kelime)) {
-        strcpy(en_uzun_kelime, kelime);
-      }
-      // Çikartilan kelimeyi sifirla
-      strcpy(kelime, "");
+    int matris[n][n];
+    int i, j;
+
+    // Matrisi kullanici tarafindan gir
+    printf("Matrisi giriniz: \n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            scanf("%d", &matris[i][j]);
+        }
     }
-    // Kelaime ekle
-    else {
-      strncat(kelime, &cumle[i], 1);
+
+    // Her satir için en büyük elemani bul
+    for (i = 0; i < n; i++) {
+        int enbuyuk = matris[i][0];
+        for (j = 1; j < n; j++) {
+            if (matris[i][j] > enbuyuk) {
+                enbuyuk = matris[i][j];
+            }
+        }
+        // En büyük elemani yazdir
+        printf("Satir %d icin en buyuk eleman: %d\n", i+1, enbuyuk);
     }
-  }
-  // Son
+
+    return 0;
+}
 

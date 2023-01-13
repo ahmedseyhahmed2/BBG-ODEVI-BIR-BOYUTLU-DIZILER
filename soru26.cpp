@@ -1,39 +1,39 @@
 #include <stdio.h>
-#include <string.h>
 
-int main(void) {
-  char cumle[1000];  // Girilen cümle
-  printf("Cumle girin: ");
-  gets(cumle);  // Cümleyi klavyeden al
+int main() {
+    int n;
+    printf("Matrisin boyutunu giriniz (n*n): ");
+    scanf("%d", &n);
 
-  char kelime[100];  // Cümleden çikartilacak kelime
-  char yeni_cumle[1000] = "";  // Yeni cümle
-  int uzunluk = strlen(cumle);
-  // Cümleden kelime çikart
-  for (int i = uzunluk - 1; i >= 0; i--) {
-    // Eger bosluk karakterine ulasildiysa, çikartilan kelimeyi tersten ekle
-    if (cumle[i] == ' ') {
-      // Çikartilan kelimeyi tersten ekle
-      for (int j = strlen(kelime) - 1; j >= 0; j--) {
-        strncat(yeni_cumle, &kelime[j], 1);
-      }
-      // Yeni cümle sonuna bosluk ekle
-      strcat(yeni_cumle, " ");
-      // Çikartilan kelimeyi sifirla
-      strcpy(kelime, "");
+    int matris[n][n];
+    int i, j;
+
+    // Matrisi kullanici tarafindan gir
+    printf("Matrisi giriniz: \n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            scanf("%d", &matris[i][j]);
+        }
     }
-    // Kelaime ekle
-    else {
-      strncat(kelime, &cumle[i], 1);
+
+    // Matrisi dikey olarak çevir
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n / 2; j++) {
+            int temp = matris[i][j];
+            matris[i][j] = matris[i][n - j - 1];
+            matris[i][n - j - 1] = temp;
+        }
     }
-  }
-  // Son çikartilan kelimeyi de tersten ekle
-  for (int j = strlen(kelime) - 1; j >= 0; j--) {
-    strncat(yeni_cumle, &kelime[j], 1);
-  }
 
-  printf("Yeni cümle: %s\n", yeni_cumle);
+    // Çevrilmis matrisi yazdir
+    printf("Cevrilmis matris: \n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            printf("%d ", matris[i][j]);
+        }
+        printf("\n");
+    }
 
-  return 0;
+    return 0;
 }
 

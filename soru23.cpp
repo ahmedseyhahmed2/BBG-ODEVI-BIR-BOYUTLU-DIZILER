@@ -1,28 +1,33 @@
 #include <stdio.h>
-#include <math.h>
 
-int main(void) {
-  int sayi;  // Girilen sayi
-  printf("Pozitif tamsayi girin: ");
-  scanf("%d", &sayi);  // Sayiyi klavyeden al
+int main() {
+    int m, n;
+    printf("Matrisin boyutunu giriniz (m*n): ");
+    scanf("%d %d", &m, &n);
 
-  int basamak_sayisi = 0;  // Sayinin basamak sayisi
-  // Sayinin basamak sayisini bul
-  while (sayi > 0) {
-    basamak_sayisi++;
-    sayi /= 10;
-  }
+    int A[m][n];
+    int i, j;
 
-  // Herbir haneyi, basamak sayisina böl
-  int sonuc = 0;
-  sayi = 12345;
-  while (sayi > 0) {
-    sonuc += sayi % 10 / basamak_sayisi;
-    sayi /= 10;
-  }
+    // Matrisi kullanici tarafindan gir
+    printf("Matrisi giriniz: \n");
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < n; j++) {
+            scanf("%d", &A[i][j]);
+        }
+    }
 
-  printf("Sonuc: %d\n", sonuc);
+    int pozitif_sayisi = 0;
+    // Her satir için pozitif degerleri say
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < n; j++) {
+            if (A[i][j] > 0) {
+                pozitif_sayisi++;
+            }
+        }
+    }
+    // Pozitif sayisini yazdir
+    printf("Pozitif degerlere sahip eleman sayisi: %d", pozitif_sayisi);
 
-  return 0;
+    return 0;
 }
 

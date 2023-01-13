@@ -1,39 +1,50 @@
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
-// 16 tabanindaki karakterleri tutan dizi
-char hex_characters[] = "0123456789ABCDEF";
+int main()
+{
+    int n, i, j, matris[100][100], secim;
 
-int main() {
-  int number;
+    printf("Kare matrisin boyutunu giriniz (nxn): ");
+    scanf("%d", &n);
 
-  printf("Lütfen pozitif tamsayi giriniz: ");
-  scanf("%d", &number);
+    printf("1. Sifir Matrisi\n");
+    printf("2. Bir Matrisi\n");
+    printf("3. Birim Matrisi\n");
+    printf("Seciminiz: ");
+    scanf("%d", &secim);
 
-  // Girilen tamsayi sifirdan küçükse, programi sonlandir.
-  if (number < 0) {
-    printf("Girilen sayi sifirdan küçük olamaz.\n");
-    return 1;
-  }
+    switch (secim)
+    {
+    case 1:
+        for (i = 0; i < n; i++)
+            for (j = 0; j < n; j++)
+                matris[i][j] = 0;
+        break;
+    case 2:
+        for (i = 0; i < n; i++)
+            for (j = 0; j < n; j++)
+                matris[i][j] = 1;
+        break;
+    case 3:
+        for (i = 0; i < n; i++)
+            for (j = 0; j < n; j++)
+                matris[i][j] = 0;
+        for (i = 0; i < n; i++)
+            matris[i][i] = 1;
+        break;
+    default:
+        printf("Gecersiz secim yaptiniz!\n");
+        return 0;
+    }
 
-  char hex_string[100];
-  int i = 0;
+    printf("Olusturulan matris:\n");
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n; j++)
+            printf("%d ", matris[i][j]);
+        printf("\n");
+    }
 
-  // Girilen tamsayi 16 tabanina dönüstürülür ve hex_string dizisine yazilir.
-  while (number > 0) {
-    hex_string[i] = hex_characters[number % 16];
-    number /= 16;
-    i++;
-  }
-
-  // Dönüstürülen sayi, ters yazilmis olarak hex_string dizisinde tutulur.
-  // Bu yüzden, dizinin elemanlari ters çevirilerek ekrana yazdirilir.
-  for (int j = i - 1; j >= 0; j--) {
-    printf("%c", hex_string[j]);
-  }
-  printf("\n");
-
-  return 0;
+    return 0;
 }
 

@@ -1,49 +1,50 @@
 #include <stdio.h>
-#include <string.h>
 
-int main()
+int kendinedonuk(int a[][10], int m)
 {
-    char encoded_message[1000];  // Kodlanmis mesaji saklayacak dizi
-    int message_index = 0;       // Mesaji çözmek için kullanilacak dizi indisi
-    char decoded_message[1000];  // Çözülmüs mesaji saklayacak dizi
-    int decoded_index = 0;       // Çözülmüs mesajin indisi
+    int i, j, flag = 1;
 
-    // Kodlanmis mesaji klavyeden al
-    printf("Kodlanmis mesaji girin: ");
-    gets(encoded_message);
-
-    // Kodlanmis mesaji karakterlerine ayir
-    int length = strlen(encoded_message);
-    for (int i = 0; i < length; i++)
+    for (i = 0; i < m; i++)
     {
-        // Eger kodlanmis mesajda bir bosluk karakteri bulursak,
-        // o karakteri atla ve ikinci karaktere geç
-        if (encoded_message[i] == ' ')
+        for (j = 0; j < m; j++)
         {
-            message_index++;
-            continue;
-        }
-
-        // Eger kodlanmis mesajda bir harf bulursak,
-        // onu çözülmüs mesaj dizisine ekle
-        if (encoded_message[i] >= 'A' && encoded_message[i] <= 'Z')
-        {
-            decoded_message[decoded_index] = encoded_message[i];
-            decoded_index++;
-        }
-
-        // Eger kodlanmis mesajda bir sayi bulursak,
-        // onu çözülmüs mesaj dizisine ekle
-        if (encoded_message[i] >= '0' && encoded_message[i] <= '9')
-        {
-            decoded_message[decoded_index] = encoded_message[i];
-            decoded_index++;
+            if (i == j && a[i][j] != 1)
+            {
+                flag = 0;
+                break;
+            }
+            else if (i != j && a[i][j] != 0)
+            {
+                flag = 0;
+                break;
+            }
         }
     }
 
-    // Çözülmüs mesaji ekrana yaz
-    printf("Cozulmus mesaj: %s\n", decoded_message);
+    return flag;
+}
 
+int main()
+{
+    int a[10][10], m;
+    printf("Matrisin boyutunu girin: ");
+    scanf("%d", &m);
+    printf("Matrisin elemanlarini girin: \n");
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            scanf("%d", &a[i][j]);
+        }
+    }
+    if (kendinedonuk(a, m))
+    {
+        printf("Girilen matris kendine donuk bir matristir\n");
+    }
+    else
+    {
+        printf("Girilen matris kendine donuk bir matris degildir\n");
+    }
     return 0;
 }
 

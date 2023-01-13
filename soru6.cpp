@@ -1,25 +1,50 @@
 #include <stdio.h>
-#include <ctype.h>
+#include <math.h>
 
-#define MAX_LENGTH 100
+int main()
+{
+    int n, i, j, uss;
+    printf("n*n matrisinin boyutunu giriniz: ");
+    scanf("%d", &n);
+    printf("A matrisinin üssünü giriniz: ");
+    scanf("%d", &uss);
 
-int main(void) {
-  char sentence[MAX_LENGTH];
-  int i;
+    int A[n][n], sonuc[n][n]; // A matrisi ve sonuc matrisi tanimlandi
 
-  printf("Cumleyi girin: ");
-  scanf("%[^\n]", sentence);
-
-  for (i = 0; sentence[i] != '\0'; i++) {
-    if (i == 0 || isspace(sentence[i - 1])) {
-      putchar(toupper(sentence[i]));
-    } else {
-      putchar(sentence[i]);
+    // A matrisi kullanici tarafindan girildi
+    printf("A matrisini giriniz: \n");
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            scanf("%d", &A[i][j]);
+        }
     }
-  }
 
-  putchar('\n');
+    // sonuc matrisi olusturuldu (A^uss)
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            sonuc[i][j] = 1;
+            for (int k = 0; k < uss; k++)
+            {
+                sonuc[i][j] *= A[i][j];
+            }
+        }
+    }
 
-  return 0;
+    // sonuçlar ekrana yazdirildi
+    printf("A matrisinin %d. üssü: \n", uss);
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            printf("%d ", sonuc[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
 }
 

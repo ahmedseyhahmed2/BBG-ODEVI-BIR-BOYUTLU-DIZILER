@@ -1,22 +1,33 @@
 #include <stdio.h>
-#include <string.h>
 
-int main(void) {
-  char cumle[1000];  // Girilen cümle
-  printf("Cumle girin: ");
-  gets(cumle);  // Cümleyi klavyeden al
-
-  int noktalama_sayisi = 0;  // Noktalama isareti sayisi
-  int uzunluk = strlen(cumle);
-  // Cümleden noktalama isaretlerini say
-  for (int i = 0; i < uzunluk; i++) {
-    if (cumle[i] == '.' || cumle[i] == '?' || cumle[i] == '!') {
-      noktalama_sayisi++;
+void split_matrix(int n, int A[n][n]) {
+    int i, j;
+    for (i = 0; i < n/2; i++) {
+        for (j = 0; j < n/2; j++) {
+            printf("A[%d][%d] = %d\n", i, j, A[i][j]);
+        }
     }
-  }
+    for (i = n/2; i < n; i++) {
+        for (j = 0; j < n/2; j++) {
+            printf("A[%d][%d] = %d\n", i, j, A[i][j]);
+        }
+    }
+    for (i = 0; i < n/2; i++) {
+        for (j = n/2; j < n; j++) {
+            printf("A[%d][%d] = %d\n", i, j, A[i][j]);
+        }
+    }
+    for (i = n/2; i < n; i++) {
+        for (j = n/2; j < n; j++) {
+            printf("A[%d][%d] = %d\n", i, j, A[i][j]);
+        }
+    }
+}
 
-  printf("Noktalama isareti sayisi: %d\n", noktalama_sayisi);
-
-  return 0;
+int main() {
+    int n = 4;
+    int A[4][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+    split_matrix(n, A);
+    return 0;
 }
 

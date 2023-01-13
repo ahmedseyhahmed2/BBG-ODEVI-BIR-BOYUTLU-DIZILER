@@ -1,19 +1,28 @@
 #include <stdio.h>
-#include <string.h>
+
+void swap_secondary_diagonal(int n, int A[n][n]) {
+    int i, j, temp;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            if (i + j == n - 1) {
+                temp = A[i][j];
+                A[i][j] = A[j][i];
+                A[j][i] = temp;
+            }
+        }
+    }
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            printf("%d ", A[i][j]);
+        }
+        printf("\n");
+    }
+}
 
 int main() {
-  char str[1000];
-  printf("bir cumle giriniz: ");
-  gets(str); // klavyeden girilen cümleyi oku
-  int len = strlen(str);
-  for (int i = 0; i < len; i++) {
-    if (str[i] == '.' || str[i] == '?' || str[i] == '!') {
-      printf("%c ", str[i]); // noktalama isareti için bosluk yaz
-    } else {
-      printf("%c", str[i]); // diger karakterler için bosluk yazma
-    }
-  }
-  printf("\n"); // yeni satira geç
-  return 0;
+    int n = 3;
+    int A[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    swap_secondary_diagonal(n, A);
+    return 0;
 }
 
